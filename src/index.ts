@@ -1,6 +1,15 @@
-import express from 'express';
+import app from "./app";
+import { connectDB } from "./db";
+import { PORT } from "./config";
 
-const app = express();
+async function main() {
+  try {
+    await connectDB();
+    app.listen(PORT);
+    console.log("Server listen on port", PORT);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-app.listen(3000)
-console.log("Server listen on port", 3000);
+main();
